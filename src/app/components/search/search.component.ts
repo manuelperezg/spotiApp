@@ -16,7 +16,7 @@ export class SearchComponent {
 	buscarArtista(termino:string){
 		//obtenemos los artistas por el termino pasado del dom
 		this.loading = true;
-		this.spotify.getArtista(termino)
+		this.spotify.getArtistas(termino)
 		.subscribe( (data: any)=> {
 			
 			this.artistas = data; 
