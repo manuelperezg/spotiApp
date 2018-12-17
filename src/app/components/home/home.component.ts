@@ -13,6 +13,8 @@ export class HomeComponent implements OnInit {
 	//paises:any[] = [];
   nuevasCanciones: any[] = [];
   loading:boolean;
+  error:boolean;
+  mensajeError:string;
 
   constructor( private http:HttpClient,
               private spotify:SpotifyService) {
@@ -26,12 +28,19 @@ export class HomeComponent implements OnInit {
   			console.log(resp);
   		} )*/
 
+      this.error = false;
       this.loading = true;
+      
       this.spotify.getNewRealse().subscribe ( (datos:any) => {
         // console.log(datos.albums.items);
         this.nuevasCanciones = datos;
         this.loading = false;
-      })
+      }, errorServicio => {
+        this.mensajeError = errorServicio.error.error.message; 
+        // console.log();
+        this.error = true;
+        this.loading = false;
+      } )
    }
 
   ngOnInit() {
